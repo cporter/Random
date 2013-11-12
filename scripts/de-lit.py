@@ -11,14 +11,13 @@ def print_docs(docs_, outfp):
         return itertools.dropwhile(lambda x: blank.match(x), lst)
     def revl(lst):
         return reversed(list(lst))
-    docs = list(docs_)
-    leading = sum(1 for _ in blanks(docs))
-    trailing = sum(1 for _ in blanks(reversed(docs)))
-    remaining = revl(drop_blanks(revl(drop_blanks(docs))))
 
-    for x in range(leading): outfp.write('\n')
-    for x in remaining: outfp.write('# %s' % x)
-    for x in range(trailing): outfp.write('\n')
+    docs = list(docs_)
+
+    for x in blanks(docs): outfp.write('\n')
+    for x in revl(drop_blanks(revl(drop_blanks(docs)))):
+        outfp.write('# %s' % x)
+    for x in blanks(reversed(docs)): outfp.write('\n')
     
 def convert_litcoffee_to_coffee(infp, outfp):
     '''convert literate coffeescript to the regular kind'''
