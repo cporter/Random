@@ -21,6 +21,7 @@ def print_docs(docs_, outfp):
     for x in range(trailing): outfp.write('\n')
     
 def convert_litcoffee_to_coffee(infp, outfp):
+    '''convert literate coffeescript to the regular kind'''
     docs, in_doc = [], True
     coffee = re.compile('^\s{4}(.+)$')
     for line in infp:
